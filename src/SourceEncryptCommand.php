@@ -58,7 +58,7 @@ class SourceEncryptCommand extends Command
         }
 
         if (empty($this->option('source'))) {
-            $sources = config('source-encrypter.source', ['app', 'database', 'routes']);
+            $sources = config('source-encrypter.source', ['app', 'database','routes','config','resources']);
         } else {
             $sources = $this->option('source');
             $sources = explode(',', $sources);
@@ -125,7 +125,7 @@ class SourceEncryptCommand extends Command
 
         $extension = Str::after($filePath, '.');
 
-        if ($extension == 'blade.php' || $extension != 'php' || $extension != 'php.old') {
+        if ($extension != 'blade.php' || $extension != 'php' || $extension != 'php.old') {
             if (!in_array($extension, $this->warned)) {
                 $this->warn("Encryption of $extension files is not currently supported. These files will be copied without change.");
                 $this->warned[] = $extension;
